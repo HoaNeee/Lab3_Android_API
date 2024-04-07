@@ -3,33 +3,33 @@ const express = require('express');
 const router = express.Router();
 
 const sinhvien = require('../models/sinhvienModel');
-const e = require('express');
+
 
 router.get('/', async (req, res)=>{
     try{
         const sinhviens = await sinhvien.find();
-        res.render('sinhvien', {sinhviens:sinhviens});
-        
-        
+        res.json(sinhviens);
     }
     catch (error){
         console.error(error);
-
         res.json({error: error})
     }
 } );
 
 
 //post
-router.post('/sinhvien', async(req, res) =>{
+router.post('/', async(req, res) =>{
     try{
         const {masv, tensv} = req.body;// lây dữ liệu
 
-        const sinhvien1 = new sinhvien({masv,tensv});//toa doi tượng mới với dữ liệuư
+        let sinhvien1 = new sinhvien({
+            masv: masv,
+            tensv: tensv
+        });//toa doi tượng mới với dữ liệuư
         
         await sinhvien1.save();
-        res.json(sinhvien1);
-        console.log(sinhvien1);
+        
+        res.status(201).json({message: 'insert thành công'})
     }
     catch (error){
         console.error(error);

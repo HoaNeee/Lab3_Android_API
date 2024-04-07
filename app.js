@@ -7,6 +7,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
 
+
 mongoose.connect('mongodb+srv://sieuhoadz:sieuhoadz@cluster0.0kyy35a.mongodb.net/db1', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -21,12 +22,12 @@ mongoose.connect('mongodb+srv://sieuhoadz:sieuhoadz@cluster0.0kyy35a.mongodb.net
 app.use('/', sinhVienRouter);
 
 //su dung ejs
-app.set('view engine', 'ejs');
+//app.set('view engine', 'ejs');
 
 // tao port
-const PORT = process.env.PORT||5000;
+const PORT = process.env.PORT||3002;
 
 //chay server
 app.listen(PORT, () =>{
-    console.log("sv dang chay o cong 5k");
+    console.log(`server dang chay o cong ${PORT}`);
 }); 
